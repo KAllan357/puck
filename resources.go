@@ -2,6 +2,7 @@ package puck
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -13,6 +14,12 @@ type Resource struct {
 	Type          string
 	NameAttribute string `json:"name_attribute"`
 	Attributes    map[string]interface{}
+}
+
+func ParseResourcesJSON(j []byte) *Resources {
+	var resources Resources
+	json.Unmarshal(j, &resources)
+	return &resources
 }
 
 func (r *Resource) ToChefResource() string {

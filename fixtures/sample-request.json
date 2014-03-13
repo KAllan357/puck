@@ -1,0 +1,20 @@
+{
+    "resources": [
+        {
+            "type": "directory",
+            "name_attribute": "/foo/bar",
+            "attributes": {
+                "recursive": true,
+                "action": "create"
+            }
+        },
+        {
+            "type": "file",
+            "name_attribute": "/foo/bar/world.txt",
+            "attributes": {
+                "content": "Hello World!",
+                "action": "create"
+            }
+        }
+    ]
+}

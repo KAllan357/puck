@@ -12,11 +12,11 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/resource", resourceHandler)
+	http.HandleFunc("/resources", resourcesHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
-func resourceHandler(w http.ResponseWriter, r *http.Request) {
+func resourcesHandler(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	var resources puck.Resources
 	json.Unmarshal(body, &resources)
