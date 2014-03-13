@@ -2,12 +2,17 @@ package puck
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"os/exec"
 	"strings"
 )
 
-func RunChefApply(input string) {
+type ChefApplyOutput struct {
+	Output []string
+}
+
+func RunChefApply(input string) []byte {
 	cmd := exec.Command("chef-apply", "-s")
 	cmd.Stdin = strings.NewReader(input)
 	var out bytes.Buffer
@@ -17,5 +22,8 @@ func RunChefApply(input string) {
 		fmt.Println("got an error")
 		fmt.Println(err)
 	}
-	fmt.Println(out.String())
+
+	chefApplyOutput := ChefApplyOutput{Output: strings.Split(out.String(), "\n")}
+	b, err := json.Marshal(chefApplyOutput)
+	return b
 }

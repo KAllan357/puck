@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"github.com/KAllan357/puck"
 	"io/ioutil"
 	"net/http"
-	// "strings"
 )
 
 func main() {
@@ -18,7 +16,8 @@ func resourcesHandler(w http.ResponseWriter, r *http.Request) {
 	resources := puck.ParseResourcesJSON(body)
 
 	resourceStrings := puck.CompileChefResources(resources.Resources)
-	puck.RunChefApply(resourceStrings)
+	chefApplyOutput := puck.RunChefApply(resourceStrings)
 
-	fmt.Fprint(w, string(body))
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(chefApplyOutput)
 }
