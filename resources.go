@@ -22,6 +22,14 @@ func ParseResourcesJSON(j []byte) *Resources {
 	return &resources
 }
 
+func CompileChefResources(resources []Resource) string {
+	var buffer bytes.Buffer
+	for _, v := range resources {
+		buffer.WriteString(fmt.Sprint(v.ToChefResource()))
+	}
+	return buffer.String()
+}
+
 func (r *Resource) ToChefResource() string {
 	var buffer bytes.Buffer
 	quotedNameAttribute := fmt.Sprintf("\"%v\"", r.NameAttribute)
