@@ -20,7 +20,7 @@ func RunChefApply(input string) []byte {
 	err := cmd.Run()
 	if err != nil {
 		fmt.Println("got an error")
-		fmt.Println(err)
+		fmt.Println(err.Error())
 	}
 
 	chefApplyOutput := ChefApplyOutput{Output: strings.Split(out.String(), "\n")}
